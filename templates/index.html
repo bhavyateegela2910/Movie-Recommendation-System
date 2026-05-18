@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>MovieAI</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        MovieAI
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/watchlist">
+            Watchlist
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+<div class="hero-section">
+
+    <h1>
+        Discover Your Next Favorite Movie
+    </h1>
+
+    <p>
+        AI-powered movie recommendation system
+    </p>
+
+    <form action="/recommend"
+          method="POST"
+          class="search-form">
+
+        <input type="text"
+               name="movie"
+               placeholder="Search Movie Name..."
+               required>
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
+
+</div>
+
+<div class="top-section">
+
+    <h2>Top Rated Movies</h2>
+
+    <div class="movie-grid">
+
+        {% for movie in top_movies.itertuples() %}
+
+        <div class="movie-card">
+
+            <h3>{{ movie.title }}</h3>
+
+            <p>
+                ⭐ {{ "%.1f"|format(movie.rating) }}
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

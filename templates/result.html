@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Recommendations</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        MovieAI
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/watchlist">
+            Watchlist
+        </a>
+
+    </div>
+
+</nav>
+
+<div class="result-container">
+
+    <h1>
+        Recommendations for
+    </h1>
+
+    <div class="searched-movie">
+        {{ searched_movie }}
+    </div>
+
+    <div class="movie-grid">
+
+        {% for movie in recommendations %}
+
+        <div class="movie-card">
+
+            {% if posters[loop.index0] %}
+
+            <img src="{{ posters[loop.index0] }}">
+
+            {% endif %}
+
+            <h3>{{ movie }}</h3>
+
+            <form action="/watchlist"
+                  method="POST">
+
+                <input type="hidden"
+                       name="movie"
+                       value="{{ movie }}">
+
+                <button type="submit">
+                    Add Watchlist
+                </button>
+
+            </form>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
